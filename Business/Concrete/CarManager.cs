@@ -22,24 +22,19 @@ namespace Business.Concrete
             _carDal.Add(car);
         }
 
-        public void Delete(Car car)
-        {
-            _carDal.Delete(car);
-        }
-
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
 
-        public Car GetById(int id)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetById(id);
+            return _carDal.GetAll(h=>h.BrandId == brandId);
         }
 
-        public void Update(Car car)
+        public List<Car> GetCarsByColorId(int colorId)
         {
-            _carDal.Update(car);
+            return _carDal.GetAll(h => h.ColorId == colorId);
         }
     }
 }
