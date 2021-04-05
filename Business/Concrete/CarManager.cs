@@ -14,12 +14,22 @@ namespace Business.Concrete
 
         public CarManager(ICarDal carDal)
         {
-             _carDal = carDal;
+            _carDal = carDal;
         }
 
         public void Add(Car car)
         {
+            if (car.Name.Length < 2 && car.DailyPrice < 0)
+            {
+                Console.WriteLine("Please check car name or daily price");
+            }
+
             _carDal.Add(car);
+        }
+
+        public void Delete(Car car)
+        {
+            _carDal.Delete(car);
         }
 
         public List<Car> GetAll()
@@ -29,12 +39,17 @@ namespace Business.Concrete
 
         public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetAll(h=>h.BrandId == brandId);
+            return _carDal.GetAll(h => h.BrandId == brandId);
         }
 
         public List<Car> GetCarsByColorId(int colorId)
         {
             return _carDal.GetAll(h => h.ColorId == colorId);
+        }
+
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
         }
     }
 }
